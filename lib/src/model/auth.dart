@@ -49,6 +49,7 @@ class Auth {
     String bucket,
     String key, {
     Map<String, dynamic>? params,
+    String method="GET",
   }) {
     final String queryString = params == null
         ? ""
@@ -59,7 +60,7 @@ class Auth {
     final String paramString = queryString.isEmpty ? "" : "&$queryString";
 
     final String stringToSign = [
-      "GET",
+      method.toUpperCase(),
       "",
       '',
       expires,

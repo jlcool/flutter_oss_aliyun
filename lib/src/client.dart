@@ -119,6 +119,7 @@ class Client with AuthMixin, HttpMixin implements ClientApi {
   @override
   Future<String> getSignedUrl(
     String fileKey, {
+      String method="GET",
     String? bucketName,
     int expireSeconds = 60,
     Map<String, dynamic>? params,
@@ -131,7 +132,7 @@ class Client with AuthMixin, HttpMixin implements ClientApi {
     final Map<String, dynamic> parameters = {
       "OSSAccessKeyId": auth.accessKey,
       "Expires": expires,
-      "Signature": auth.getSignature(expires, bucket, fileKey, params: params),
+      "Signature": auth.getSignature(expires, bucket, fileKey, params: params,method:method),
       "security-token": auth.encodedToken
     };
     parameters.addAll(params ?? {});
